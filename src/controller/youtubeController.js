@@ -58,7 +58,7 @@ exports.getUserVideos = async (req, res) => {
     });
 
     const uploadsPlaylistId =
-      channelResponse.data.items[0].contentDetails.relatedPlaylists.uploads;
+      channelResponse?.data?.items[0].contentDetails.relatedPlaylists.uploads;
 
     const videosResponse = await youtube.playlistItems.list({
       part: "snippet,contentDetails",
@@ -67,10 +67,10 @@ exports.getUserVideos = async (req, res) => {
     });
 
     // Return video details
-    if (videosResponse.data.items.length === 0) {
+    if (videosResponse?.data?.items?.length === 0) {
       res.status(200).json({ message: "No videos found for this user." });
     } else {
-      res.status(200).json(videosResponse.data.items);
+      res.status(200).json(videosResponse?.data?.items);
     }
   } catch (error) {
     console.error("Error fetching user videos:", error);
